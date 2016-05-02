@@ -1,14 +1,45 @@
+#white all because we are looking for the parttern
+
+#RC = n! = n * (n-1)
+#BC = 1! = 1
+#BC = 0! = 1
 
 def fact(n)
+  return 1 if n == 0
+  n * fact(n-1)
 end
 
+# 1 1 2 3 5 7 13 20
+# fib(1) = 1
+# fib(2) = 1
+# fib(3) = fib(2) + fib(1)
+# fib(4) = fib(3) +fib(2)
+# fib(n) = fib(n-1) + fib(n-2)
 def fib(n)
+  return n if (0..1).include? n
+  fib(n-1) + fib(n-2) if n > 1
 end
 
+#you should use the length of the word as a basecase
+#rc striping words
 def pal(s)
+  return true if s.length <= 1
+	return false if s.slice!(0) != s.slice!(s.length - 1)
+	pal(s)
 end
 
 def binary(n)
+  binary_helper(n,"","")
+end
+
+def binary_helper(digits,binary,result)
+  if digits == 0
+    result += binary + " "
+  else
+  result = binary_helper(digits-1, binary+"0",result)
+  result = binary_helper(digits-1, binary+"1",result)
+  end
+  return result
 end
 
 def travel(x,y)
